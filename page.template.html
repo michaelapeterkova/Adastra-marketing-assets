@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI-Powered Bank | Adastra</title>
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ADASTRA DESIGN SYSTEM — fonts, tokens, base and the component
+   primitives this page uses, inlined verbatim so the file is
+   self-contained. Figtree is bundled locally (no Google Fonts).
+   ══════════════════════════════════════════════════════════════════ */
+@font-face { font-family:"Figtree"; font-weight:400; font-style:normal; font-display:swap; src:url("{{FONT:Figtree-Regular.ttf}}") format("truetype"); }
+@font-face { font-family:"Figtree"; font-weight:600; font-style:normal; font-display:swap; src:url("{{FONT:Figtree-SemiBold.ttf}}") format("truetype"); }
+@font-face { font-family:"Figtree"; font-weight:700; font-style:normal; font-display:swap; src:url("{{FONT:Figtree-Bold.ttf}}") format("truetype"); }
+@font-face { font-family:"Figtree"; font-weight:400; font-style:italic; font-display:swap; src:url("{{FONT:Figtree-Italic.ttf}}") format("truetype"); }
+
+:root {
+  /* Role colors */
+  --color-bg:       #ffffff;
+  --color-surface:  #f4f4f4;
+  --color-text:     #424242;
+  --color-accent:   #f9423a;   /* Adastra Red   — CTAs, key numbers, eyebrows */
+  --color-accent-2: #163b6e;   /* Deep Blue     — headings, nav, CTA bands */
+  --color-blue:     #1f549a;   /* Blue T01      — button fills, dark surfaces */
+  --color-divider:  #dadada;
+  --color-divider-light: #f0f0f0;
+  /* Neutral ramp */
+  --color-neutral-100:#ffffff; --color-neutral-200:#f4f4f4; --color-neutral-300:#dadada;
+  --color-neutral-400:#9d9d9d; --color-neutral-500:#575757; --color-neutral-600:#424242;
+  --color-neutral-700:#2a2a2a; --color-neutral-800:#1a1a1a; --color-neutral-900:#000000;
+  /* Red tint ramp */
+  --color-accent-100:#fed9d7; --color-accent-200:#fdb3b0; --color-accent-300:#fb8e89;
+  --color-accent-400:#fa6861; --color-accent-500:#f9423a; --color-accent-600:#e0342c;
+  --color-accent-700:#c42820; --color-accent-800:#9e1c16; --color-accent-900:#78110d;
+  /* Deep Blue tint ramp */
+  --color-accent-2-100:#d1dae8; --color-accent-2-200:#a5bbd7; --color-accent-2-300:#7998c2;
+  --color-accent-2-400:#4d76b4; --color-accent-2-500:#1f549a; --color-accent-2-600:#163b6e;
+  --color-accent-2-700:#102e56; --color-accent-2-800:#0b203f; --color-accent-2-900:#051227;
+  /* Type */
+  --font-heading:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --font-body:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --font-heading-weight:600;
+  /* Spacing */
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px; --space-5:20px;
+  --space-6:24px; --space-7:28px; --space-8:32px; --space-10:40px; --space-12:48px;
+  --space-16:64px; --space-20:80px;
+  /* Radius */
+  --radius-xs:4px; --radius-sm:8px; --radius-md:16px; --radius-lg:16px;
+  /* Elevation */
+  --shadow-sm:0 0 8px 0 #dadada;
+  --shadow-md:0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg:0 8px 32px rgba(0,0,0,0.14);
+}
+
+/* ── base ─────────────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; }
+body {
+  margin:0; background:var(--color-bg); color:var(--color-text);
+  font-family:var(--font-body); font-size:16px; line-height:1.6; font-weight:400;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family:var(--font-heading); font-weight:var(--font-heading-weight);
+  color:var(--color-accent-2); line-height:1.15; margin:0 0 var(--space-3);
+}
+h1 { font-size:52px; line-height:1.12; }
+h2 { font-size:38px; line-height:1.12; }
+h3 { font-size:22px; line-height:1.18; }
+h4 { font-size:20px; }
+p { margin:0 0 var(--space-3); }
+a { color:var(--color-accent); text-underline-offset:3px; }
+img,svg { display:block; max-width:100%; }
+:focus { outline:none; }
+:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+::selection { background:color-mix(in srgb, var(--color-accent) 25%, transparent); }
+
+/* ── buttons ──────────────────────────────────────────────────────── */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+  cursor:pointer; text-decoration:none;
+  font-family:var(--font-heading); font-weight:600;
+  font-size:14px; line-height:1.2; letter-spacing:0.06em; text-transform:uppercase;
+  padding:12px 28px; border-radius:var(--radius-md);
+  border:2px solid transparent; min-height:44px;
+  transition:background 0.18s, border-color 0.18s, color 0.18s;
+  white-space:nowrap;
+}
+.btn-primary { background:var(--color-blue); color:#fff; border-color:var(--color-blue); }
+.btn-primary:hover { background:var(--color-accent); border-color:var(--color-accent); color:#fff; }
+.btn-secondary { background:var(--color-accent); color:#fff; border-color:var(--color-accent); }
+.btn-secondary:hover { background:var(--color-blue); border-color:var(--color-blue); color:#fff; }
+.btn-tertiary { background:#fff; color:var(--color-accent-2); border-color:#fff; }
+.btn-tertiary:hover { background:var(--color-accent); color:#fff; border-color:var(--color-accent); }
+.btn-accent-1 { background:transparent; color:#fff; border-color:#fff; }
+.btn-accent-1:hover { background:var(--color-accent); border-color:var(--color-accent); color:#fff; }
+.btn-accent-2 { background:transparent; color:var(--color-blue); border-color:var(--color-blue); }
+.btn-accent-2:hover { background:var(--color-blue); color:#fff; border-color:var(--color-blue); }
+.btn-accent-3 { background:transparent; color:#fff; border-color:#fff; }
+.btn-accent-3:hover { background:#fff; color:var(--color-accent-2); border-color:#fff; }
+
+/* ── tags ─────────────────────────────────────────────────────────── */
+.tag {
+  display:inline-flex; align-items:center; gap:var(--space-1);
+  font-family:var(--font-body); font-size:12px; font-weight:600;
+  padding:4px 10px; border-radius:var(--radius-xs);
+}
+.tag-red { background:var(--color-accent-100); color:var(--color-accent-700); }
+.tag-blue { background:var(--color-accent-2-100); color:var(--color-accent-2-600); }
+.tag-neutral { background:var(--color-surface); color:var(--color-text); }
+.tag-outline { background:transparent; border:1px solid var(--color-divider); color:var(--color-text); }
+
+/* ── cards ────────────────────────────────────────────────────────── */
+.card { background:#fff; border-radius:var(--radius-md); box-shadow:var(--shadow-sm); padding:var(--space-8); }
+.card-outlined { background:#fff; border-radius:var(--radius-md); border:1px solid var(--color-divider); padding:var(--space-8); }
+.card-dark { background:var(--color-blue); border-radius:var(--radius-md); padding:var(--space-8); color:#fff; }
+.card h3 { font-size:18px; margin-bottom:var(--space-2); }
+.card p, .card-outlined p { font-size:15px; color:var(--color-text); }
+
+/* ── sections, grids, eyebrow ─────────────────────────────────────── */
+.section { padding:var(--space-20) var(--space-10); }
+.section-alt { background:var(--color-surface); }
+.section-dark { background:var(--color-blue); color:#fff; }
+.section-navy { background:var(--color-accent-2); color:#fff; }
+.container { max-width:1280px; margin:0 auto; }
+.grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-6); }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6); }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-6); }
+.eyebrow {
+  font-size:12px; font-weight:600; letter-spacing:0.28em;
+  text-transform:uppercase; color:var(--color-accent); margin-bottom:var(--space-2);
+}
+/* Dark background rule (absolute): on any dark or coloured surface, text is
+   only solid #ffffff — including eyebrows, labels and links. Every dark
+   surface on this page is listed here; buttons keep their own variants. */
+.section-dark, .section-navy, .card-dark, .hero, .foundations { color:#fff; }
+.section-dark *:not(.btn):not(.btn *), .section-navy *:not(.btn):not(.btn *),
+.card-dark *:not(.btn):not(.btn *),
+.hero *:not(.btn):not(.btn *), .foundations *:not(.btn):not(.btn *) { color:#fff; }
+
+/* ── stats (neutral strip — numbers carry the colour, not the band) ── */
+.stat { text-align:left; }
+.stat-number { font-size:48px; font-weight:700; color:var(--color-accent); line-height:1; letter-spacing:-0.02em; }
+.stat-label { font-size:14px; color:var(--color-text); margin-top:var(--space-2); }
+.stat-label small { color:var(--color-neutral-400); }
+.stats-bar { border-top:1px solid var(--color-divider); border-bottom:1px solid var(--color-divider); padding:var(--space-10) var(--space-10); }
+
+/* ── table ────────────────────────────────────────────────────────── */
+.table { width:100%; border-collapse:collapse; font-size:14px; }
+.table td { padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-divider); }
+.table tr:last-child td { border-bottom:none; }
+.table .metric { font-family:var(--font-heading); font-weight:600; font-size:15px; color:var(--color-accent-2); }
+.table .evidence { text-align:right; color:var(--color-neutral-500); }
+
+/* ══════════════════════════════════════════════════════════════════
+   PAGE LAYER — structures the design system does not ship a component
+   for: the value-map "house", the capability tiles, the trust/story
+   strips, the two-view (map / deep dive) shell. Tokens only.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Icons — colour always comes from the surface, never from the icon. */
+.ico { width:48px; height:48px; flex-shrink:0; }
+.ico-sm { width:32px; height:32px; }
+.ico-md { width:44px; height:44px; }
+
+/* ── nav ──────────────────────────────────────────────────────────── */
+.nav {
+  background:#fff; border-bottom:1px solid var(--color-divider);
+  height:72px; display:flex; align-items:center; padding:0 var(--space-10);
+  position:sticky; top:0; z-index:100;
+}
+.nav-inner { max-width:1280px; width:100%; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:var(--space-8); }
+.nav-brand { display:flex; align-items:center; gap:var(--space-5); text-decoration:none; color:var(--color-accent); }
+.nav-brand .logo { width:120px; height:auto; }
+.nav-brand .nav-context {
+  font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--color-neutral-500); padding-left:var(--space-5);
+  border-left:1px solid var(--color-divider); line-height:1.4; white-space:nowrap;
+}
+.nav-links { display:flex; gap:var(--space-7); list-style:none; margin:0; padding:0; align-items:center; }
+.nav-links a { font-size:15px; color:var(--color-text); text-decoration:none; transition:color 0.18s; cursor:pointer; }
+.nav-links a:hover { color:var(--color-accent); }
+
+/* ── hero (kept short — the map, not the hero, is the destination) ── */
+.hero { background:var(--color-accent-2); color:#fff; padding:var(--space-12) var(--space-10); }
+.hero-grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:var(--space-10); align-items:center; }
+.hero h1 { color:#fff; margin-bottom:var(--space-4); }
+.hero-lede { font-size:18px; line-height:1.5; max-width:560px; margin-bottom:var(--space-6); }
+.hero-actions { display:flex; gap:var(--space-4); flex-wrap:wrap; }
+.hero-photo { border-radius:var(--radius-md); overflow:hidden; border:1px solid rgba(255,255,255,0.18); aspect-ratio:4/3; }
+.hero-photo img { width:100%; height:100%; object-fit:cover; }
+
+/* ── trust bar — proof the map is real, not a slide ─────────────────── */
+.trust-bar { padding:var(--space-7) var(--space-10); }
+.trust-label { font-size:12px; font-weight:600; letter-spacing:0.28em; text-transform:uppercase; color:var(--color-accent); text-align:center; margin:0 0 var(--space-5); }
+.trust-logos { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:var(--space-8) var(--space-10); }
+.trust-logos img { height:36px; width:auto; max-width:140px; object-fit:contain; filter:grayscale(1); opacity:0.55; transition:opacity 0.18s, filter 0.18s; }
+.trust-logos img:hover { filter:grayscale(0); opacity:1; }
+
+/* ── section heading block ────────────────────────────────────────── */
+.section-head { max-width:760px; margin-bottom:var(--space-10); }
+.section-head.center { margin-left:auto; margin-right:auto; text-align:center; }
+.section-head p { font-size:17px; color:var(--color-neutral-500); margin:0; }
+.section-navy .section-head p, .section-dark .section-head p { color:#fff; }
+
+/* ── the value map ("house") ──────────────────────────────────────── */
+.house { display:grid; gap:var(--space-10); }
+.house-band {
+  background:var(--color-accent-2); color:#fff; border-radius:var(--radius-md);
+  padding:var(--space-6) var(--space-10); text-align:center;
+}
+.house-band h3 { color:#fff; font-size:22px; margin-bottom:var(--space-1); }
+.house-band p { font-size:14px; margin:0; }
+
+/* Row heading — a real title, not a tiny rotated label. */
+.row-heading { display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-5); }
+.row-heading-title { display:flex; align-items:center; gap:var(--space-4); }
+.row-heading-num { font-family:var(--font-heading); font-weight:700; font-size:15px; color:#fff; background:var(--color-accent); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.row-heading h3 { font-size:28px; margin:0; }
+.row-hint { font-size:13px; color:var(--color-neutral-500); }
+
+.pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-4); }
+.pillar { display:flex; flex-direction:column; gap:var(--space-3); }
+.pillar-head {
+  background:var(--color-blue); color:#fff; border-radius:var(--radius-md);
+  padding:var(--space-4) var(--space-5); display:flex; align-items:center; gap:var(--space-3);
+}
+.pillar-head .ico { color:#fff; }
+.pillar-head-title { font-family:var(--font-heading); font-weight:600; font-size:16px; line-height:1.2; }
+.pillar-boxes { display:flex; flex-direction:column; gap:var(--space-2); flex:1; }
+
+/* Every card in the grid looks the same, whether it's a label or a link.
+   The only signal that a card goes somewhere is its own tag line. */
+.tile {
+  background:#fff; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm);
+  padding:var(--space-5); display:flex; flex-direction:column; gap:6px;
+  flex:1; text-decoration:none;
+}
+.tile-title { font-family:var(--font-heading); font-weight:600; font-size:14.5px; line-height:1.25; color:var(--color-accent-2); }
+.tile-desc { font-size:12.5px; line-height:1.4; color:var(--color-neutral-500); }
+.tile-cta {
+  margin-top:2px; font-size:11px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--color-accent);
+  display:inline-flex; align-items:center; gap:5px;
+}
+a.tile { cursor:pointer; transition:box-shadow 0.18s; }
+a.tile:hover { box-shadow:var(--shadow-md); }
+
+/* Foundations block */
+.foundations { background:var(--color-blue); border-radius:var(--radius-md); padding:var(--space-5); display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4); }
+.foundation-item {
+  border:1px solid rgba(255,255,255,0.25); border-radius:var(--radius-md);
+  padding:var(--space-5); display:flex; flex-direction:column; gap:var(--space-3); text-decoration:none;
+}
+.foundation-item .ico { color:#fff; }
+.foundation-name { font-family:var(--font-heading); font-weight:600; font-size:16px; line-height:1.2; }
+.foundation-detail { font-size:13.5px; line-height:1.4; }
+a.foundation-item { transition:background 0.18s, border-color 0.18s; }
+a.foundation-item:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.45); }
+.foundation-cta { margin-top:auto; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; display:inline-flex; align-items:center; gap:5px; text-decoration:underline; text-underline-offset:3px; }
+
+/* ── real case studies — photos + client logos, linked out ─────────── */
+.story-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-6); }
+.story-card { display:flex; flex-direction:column; text-decoration:none; background:#fff; border-radius:var(--radius-md); box-shadow:var(--shadow-sm); overflow:hidden; transition:box-shadow 0.18s; }
+.story-card:hover { box-shadow:var(--shadow-md); }
+.story-photo { position:relative; height:190px; }
+.story-photo-bg { width:100%; height:100%; object-fit:cover; display:block; }
+.story-logo { position:absolute; left:var(--space-5); bottom:-28px; height:56px; width:auto; max-width:150px; object-fit:contain; background:#fff; padding:10px 16px; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm); }
+.story-body { padding:calc(var(--space-8) + 8px) var(--space-6) var(--space-6); display:flex; flex-direction:column; gap:var(--space-2); flex:1; }
+.story-tag { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
+.story-tag-value { color:var(--color-accent); }
+.story-tag-foundation { color:var(--color-blue); }
+.story-body h3 { font-size:17px; margin:0; }
+.story-link { margin-top:auto; font-size:12px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent); }
+.story-card:hover .story-link { text-decoration:underline; }
+
+/* ── two-view shell ───────────────────────────────────────────────── */
+.view[hidden] { display:none; }
+.crumbs { display:flex; align-items:center; gap:var(--space-3); font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:var(--space-5); }
+.crumbs a { text-decoration:none; cursor:pointer; }
+.crumbs a:hover { text-decoration:underline; }
+
+/* ── deep-dive capability cards ───────────────────────────────────── */
+.cap-card { display:flex; flex-direction:column; gap:var(--space-3); padding:var(--space-6); }
+.cap-card .ico { color:var(--color-accent); }
+.cap-card h3 { font-size:17px; margin:0; }
+.cap-card p { font-size:14px; line-height:1.55; margin:0; }
+.cap-card .cap-proof { font-size:13px; color:var(--color-neutral-500); border-top:1px solid var(--color-divider); padding-top:var(--space-3); margin:auto 0 0; }
+.row-label { font-size:12px; font-weight:600; letter-spacing:0.28em; text-transform:uppercase; margin:0 0 var(--space-4); }
+.row-label.intel { color:var(--color-blue); }
+.row-label.value { color:var(--color-accent); }
+
+/* ── agent tiers ──────────────────────────────────────────────────── */
+.tier { display:grid; grid-template-columns:150px 1fr; gap:var(--space-5); align-items:start; padding:var(--space-5) 0; border-bottom:1px solid var(--color-divider); }
+.tier:last-child { border-bottom:none; }
+.tier-label { font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--color-accent-2); padding-top:6px; }
+.tier-pills { display:flex; flex-wrap:wrap; gap:var(--space-2); }
+.pill { font-size:13px; font-weight:600; padding:7px 16px; border-radius:999px; white-space:nowrap; }
+.pill-live { background:var(--color-blue); color:#fff; }
+.pill-emerging { background:transparent; border:1.5px solid var(--color-blue); color:var(--color-blue); }
+.pill-frontier { background:transparent; border:1.5px dashed var(--color-divider); color:var(--color-neutral-500); }
+
+/* ── proof card ───────────────────────────────────────────────────── */
+.proof { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center; }
+.proof-quote { font-size:26px; line-height:1.3; font-weight:600; margin-bottom:var(--space-4); }
+.proof-source { font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; }
+.proof-list { list-style:none; margin:0; padding:0; display:grid; gap:var(--space-4); }
+.proof-list li { display:grid; grid-template-columns:auto 1fr; gap:var(--space-4); align-items:baseline; padding-bottom:var(--space-4); border-bottom:1px solid rgba(255,255,255,0.25); }
+.proof-list li:last-child { border-bottom:none; padding-bottom:0; }
+.proof-list b { font-size:26px; font-weight:700; line-height:1.1; white-space:nowrap; }
+.proof-list span { font-size:15px; line-height:1.45; }
+
+/* ── faq ──────────────────────────────────────────────────────────── */
+.faq { border-top:1px solid var(--color-divider); }
+.faq details { border-bottom:1px solid var(--color-divider); }
+.faq summary {
+  cursor:pointer; list-style:none; padding:var(--space-6) 0;
+  font-family:var(--font-heading); font-weight:600; font-size:18px; color:var(--color-accent-2);
+  display:flex; justify-content:space-between; align-items:center; gap:var(--space-6);
+}
+.faq summary::-webkit-details-marker { display:none; }
+.faq summary::after { content:"+"; color:var(--color-accent); font-size:26px; font-weight:600; line-height:1; }
+.faq details[open] summary::after { content:"–"; }
+.faq .answer { font-size:16px; line-height:1.6; color:var(--color-text); padding:0 var(--space-12) var(--space-6) 0; margin:0; }
+
+/* ── cta + footer ─────────────────────────────────────────────────── */
+.cta { display:grid; grid-template-columns:1.2fr auto; gap:var(--space-12); align-items:center; }
+.cta h2 { color:#fff; margin-bottom:var(--space-3); }
+.cta p { font-size:17px; margin:0; max-width:600px; }
+footer { background:#fff; border-top:1px solid var(--color-divider); padding:var(--space-10); }
+.foot-inner { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:var(--space-8); align-items:end; }
+.foot-inner .logo { width:110px; color:var(--color-accent); margin-bottom:var(--space-4); }
+footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); margin:0; max-width:820px; }
+.foot-meta { font-size:12px; color:var(--color-neutral-400); text-align:right; white-space:nowrap; }
+
+/* ── responsive ───────────────────────────────────────────────────── */
+@media (max-width:1080px) {
+  h1 { font-size:38px; } h2 { font-size:30px; }
+  .hero-grid, .proof, .cta { grid-template-columns:1fr; gap:var(--space-8); }
+  .hero-photo { display:none; }
+  .pillars { grid-template-columns:repeat(2,1fr); }
+  .foundations { grid-template-columns:1fr; }
+  .story-grid { grid-template-columns:1fr; }
+  .nav-links { display:none; }
+  .grid-4 { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:720px) {
+  .section, .hero, .stats-bar, .trust-bar { padding-left:var(--space-6); padding-right:var(--space-6); }
+  .nav { padding:0 var(--space-6); }
+  .nav-brand .nav-context { display:none; }
+  h1 { font-size:32px; } h2 { font-size:25px; }
+  .pillars, .grid-2, .grid-3, .grid-4 { grid-template-columns:1fr; }
+  .tier { grid-template-columns:1fr; gap:var(--space-3); }
+  .foot-inner { grid-template-columns:1fr; }
+  .foot-meta { text-align:left; }
+  .row-heading { flex-direction:column; align-items:flex-start; gap:var(--space-2); }
+}
+
+/* ── no JS: fall back to one long page with both views visible ────── */
+.no-js .view[hidden] { display:block; }
+.no-js .tile-cta, .no-js .crumbs { display:none; }
+
+/* ── print: both views, expanded, for leave-behind PDFs ───────────── */
+@media print {
+  .nav { position:static; }
+  .view[hidden] { display:block !important; }
+  .hero, .section-navy, .section-dark, .card-dark, .foundations, .pillar-head, .house-band { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .faq details { display:block; } .faq .answer { display:block; }
+  .hero-actions, .cta .btn { display:none; }
+  .section { padding-top:var(--space-12); padding-bottom:var(--space-12); }
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js');</script>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" data-view="map">
+      {{LOGO}}
+      <span class="nav-context">AI in Financial Services<br>Retail Banking</span>
+    </a>
+    <ul class="nav-links">
+      <li><a data-view="map" href="#value-map">Value Map</a></li>
+      <li><a data-view="detail" href="#hyperpersonalization">Deep Dive</a></li>
+      <li><a data-view="map" href="#case-studies">Case Studies</a></li>
+      <li><a data-view="map" href="#talk">Talk to Us</a></li>
+    </ul>
+    <a class="btn btn-secondary" data-view="map" href="#talk">Book a Session</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     VIEW 1 — THE MAP
+     ══════════════════════════════════════════════════════════════ -->
+<main class="view" id="view-map">
+
+<header class="hero" id="top">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">AI in Financial Services &middot; Retail Banking</p>
+      <h1>The AI-Powered Bank</h1>
+      <p class="hero-lede">Experimenting is easy. Strategy and production are where the challenge lies. 91% of banks prioritize AI, but only 23% have shipped it.</p>
+      <div class="hero-actions">
+        <a class="btn btn-tertiary" href="#value-map">Open the Value Map</a>
+        <a class="btn btn-accent-1" data-view="detail" href="#hyperpersonalization">See a Deep Dive</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="{{IMG:company.jpg}}" alt="A banking and technology team reviewing work together">
+    </div>
+  </div>
+</header>
+
+<section class="trust-bar">
+  <div class="container">
+    <p class="trust-label">Trusted By</p>
+    <div class="trust-logos">
+      <img src="{{IMG:raiffeisen-logo.png}}" alt="Raiffeisenbank">
+      <img src="{{IMG:erste-bank-logo.png}}" alt="Erste Bank">
+      <img src="{{IMG:komercni-banka-logo.png}}" alt="Komerční banka">
+      <img src="{{IMG:kbc-logo.png}}" alt="KBC">
+      <img src="{{IMG:nlb-logo.png}}" alt="NLB">
+      <img src="{{IMG:tatra-banka-logo.png}}" alt="Tatra banka">
+      <img src="{{IMG:ubb-logo.png}}" alt="UBB">
+      <img src="{{IMG:csob-logo.png}}" alt="ČSOB">
+      <img src="{{IMG:equa-bank-logo.png}}" alt="Equa Bank">
+      <img src="{{IMG:cetelem-logo.png}}" alt="Cetelem">
+    </div>
+  </div>
+</section>
+
+<!-- THE VALUE MAP -->
+<section class="section section-alt" id="value-map">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">The Value Map</p>
+      <h2>Where AI Actually Pays Off</h2>
+      <p>Four value drivers, three foundations, one AI strategy that ties them together. We deliver across all seventeen areas below: two are opened up in full detail here, and we can bring the same depth to any other on request.</p>
+    </div>
+
+    <div class="house">
+
+      <div class="house-band">
+        <h3>Realizing the value</h3>
+        <p>Measurable outcomes in the business, not models in a lab.</p>
+      </div>
+
+      <div>
+        <div class="row-heading">
+          <div class="row-heading-title">
+            <span class="row-heading-num">1</span>
+            <h3>AI Value Drivers</h3>
+          </div>
+          <span class="row-hint">17 capability areas across the P&amp;L</span>
+        </div>
+        <div class="pillars">
+
+          <div class="pillar">
+            <div class="pillar-head">{{ICON:customer-insights}}<span class="pillar-head-title">Client</span></div>
+            <div class="pillar-boxes">
+              <div class="tile"><span class="tile-title">Digital Onboarding Acceleration</span><span class="tile-desc">Turns applicants into funded customers faster, before they abandon and go elsewhere.</span></div>
+              <div class="tile"><span class="tile-title">Digital Activation</span><span class="tile-desc">Gets new customers transacting in their first weeks, before they go dormant.</span></div>
+              <div class="tile"><span class="tile-title">Customer Primarization</span><span class="tile-desc">Wins the salary and everyday spend, making the bank the customer's main relationship.</span></div>
+              <div class="tile"><span class="tile-title">NPS Uplift</span><span class="tile-desc">Removes the friction that turns customers into detractors.</span></div>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-head">{{ICON:bar-chart-arrow-growth}}<span class="pillar-head-title">Revenue Growth</span></div>
+            <div class="pillar-boxes">
+              <a class="tile" data-view="detail" href="#hyperpersonalization">
+                <span class="tile-title">Hyperpersonalization</span>
+                <span class="tile-desc">Grows revenue per customer with real-time, individually tailored offers.</span>
+                <span class="tile-cta">Deep dive &rsaquo;</span>
+              </a>
+              <div class="tile"><span class="tile-title">Personal Advisory Intelligence</span><span class="tile-desc">Gives advisers what they need to turn meetings into sales.</span></div>
+              <div class="tile"><span class="tile-title">Conversational Banking</span><span class="tile-desc">Sells and services customers in the channel they already use.</span></div>
+              <div class="tile"><span class="tile-title">Price Optimization</span><span class="tile-desc">Prices each customer by risk and willingness to pay, not a flat rate card.</span></div>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-head">{{ICON:resource-efficiency}}<span class="pillar-head-title">Cost Efficiency</span></div>
+            <div class="pillar-boxes">
+              <a class="tile" href="https://solutions.adastracorp.com/solutions/ai-powered-back-office-automation-banks-insurers/" target="_blank" rel="noopener">
+                <span class="tile-title">Back Office Automation</span>
+                <span class="tile-desc">Cuts servicing cost 20 to 40% and speeds claims turnaround 40 to 60%.</span>
+                <span class="tile-cta">See the solution &#8599;</span>
+              </a>
+              <div class="tile"><span class="tile-title">Contact Center Automation</span><span class="tile-desc">Cuts contact center cost by resolving routine calls without an agent.</span></div>
+              <div class="tile"><span class="tile-title">Front Office Automation</span><span class="tile-desc">Frees branch and relationship staff to sell instead of process paperwork.</span></div>
+              <div class="tile"><span class="tile-title">Software Engineering Productivity</span><span class="tile-desc">Ships change faster without growing the engineering headcount.</span></div>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-head">{{ICON:security-shield}}<span class="pillar-head-title">Risk Management</span></div>
+            <div class="pillar-boxes">
+              <div class="tile"><span class="tile-title">Credit Risk</span><span class="tile-desc">Approves more good customers without taking on more bad debt.</span></div>
+              <div class="tile"><span class="tile-title">Collections Automation</span><span class="tile-desc">Recovers more debt at lower cost, with a lighter touch on good customers.</span></div>
+              <div class="tile"><span class="tile-title">Operational Risk &amp; Compliance</span><span class="tile-desc">Cuts compliance cost by monitoring controls continuously instead of by sample.</span></div>
+              <div class="tile"><span class="tile-title">Fraud Prevention &amp; AML</span><span class="tile-desc">Stops more fraud while freeing investigators from chasing false alarms.</span></div>
+              <div class="tile"><span class="tile-title">Cyber Security</span><span class="tile-desc">Detects and contains attacks before they turn into losses.</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="foundations">
+        <div class="row-heading">
+          <div class="row-heading-title">
+            <span class="row-heading-num">2</span>
+            <h3>Foundations</h3>
+          </div>
+          <span class="row-hint">What every area above depends on</span>
+        </div>
+        <div class="foundations">
+          <div class="foundation-item">
+            {{ICON:team-work}}
+            <div>
+              <div class="foundation-name">Workforce Enablement</div>
+              <div class="foundation-detail">Employee productivity and talent intelligence.</div>
+            </div>
+          </div>
+          <div class="foundation-item">
+            {{ICON:ai-governance}}
+            <div>
+              <div class="foundation-name">AI Platform &amp; Technology Enablement</div>
+              <div class="foundation-detail">The platform every use case runs on, including AI governance.</div>
+            </div>
+          </div>
+          <a class="foundation-item" href="https://adastracorp.com/ai-ready-data/" target="_blank" rel="noopener">
+            {{ICON:data-management}}
+            <div>
+              <div class="foundation-name">AI-Ready Data</div>
+              <div class="foundation-detail">The bedrock. Nothing above it works without it.</div>
+            </div>
+            <span class="foundation-cta">See the solution &#8599;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="house-band">
+        <h3>AI Strategy</h3>
+        <p>Prioritizing where to start, redesigning the processes AI plugs into, and sequencing delivery so each phase pays for the next.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REAL CASE STUDIES -->
+<section class="section" id="case-studies">
+  <div class="container">
+    <div class="section-head">
+      <h2>Already Running in Major Banks</h2>
+      <p>For more than 25 years, we've built the data platforms, risk models and now the AI systems that regional and global banks run their business on. The four engagements below are recent examples, each linked to its full case study on adastracorp.com.</p>
+    </div>
+    <div class="story-grid">
+      <a class="story-card" href="https://adastracorp.com/success-stories/ubb-increased-lead-generated-business-by-20-and-automated-100-customer-journeys-with-bloomreach/" target="_blank" rel="noopener">
+        <div class="story-photo">
+          <img class="story-photo-bg" src="{{IMG:story-ubb.jpg}}" alt="Contactless mobile payment">
+          <img class="story-logo" src="{{IMG:ubb-logo.png}}" alt="UBB">
+        </div>
+        <div class="story-body">
+          <span class="story-tag story-tag-value">Revenue Growth</span>
+          <h3>UBB: +20% Lead-Generated Business, 100+ Journeys Automated</h3>
+          <span class="story-link">Read the case study &#8599;</span>
+        </div>
+      </a>
+      <a class="story-card" href="https://adastracorp.com/success-stories/driving-4-9-customer-satisfaction-rates-and-digital-branch-cx-with-a-robotic-bank-assistant/" target="_blank" rel="noopener">
+        <div class="story-photo">
+          <img class="story-photo-bg" src="{{IMG:story-tatra.jpg}}" alt="Pepper robotic bank assistant on stage">
+          <img class="story-logo" src="{{IMG:tatra-banka-logo.png}}" alt="Tatra banka">
+        </div>
+        <div class="story-body">
+          <span class="story-tag story-tag-value">Client</span>
+          <h3>Tatra Banka: 4.9 Satisfaction with a Robotic Bank Assistant</h3>
+          <span class="story-link">Read the case study &#8599;</span>
+        </div>
+      </a>
+      <a class="story-card" href="https://adastracorp.com/success-stories/raiffeisenbank-a-unified-data-platform-concept-on-databricks-in-aws-cloud/" target="_blank" rel="noopener">
+        <div class="story-photo">
+          <img class="story-photo-bg" src="{{IMG:story-raiffeisen-data.jpg}}" alt="Modern bank headquarters building">
+          <img class="story-logo" src="{{IMG:raiffeisen-logo.png}}" alt="Raiffeisenbank">
+        </div>
+        <div class="story-body">
+          <span class="story-tag story-tag-foundation">Foundations</span>
+          <h3>Raiffeisenbank: A Unified Data Platform on Databricks in AWS</h3>
+          <span class="story-link">Read the case study &#8599;</span>
+        </div>
+      </a>
+      <a class="story-card" href="https://adastracorp.com/success-stories/nlb-scales-ai-agents-with-enterprise-agentic-ai-platform/" target="_blank" rel="noopener">
+        <div class="story-photo">
+          <img class="story-photo-bg" src="{{IMG:story-nlb.jpg}}" alt="NLB headquarters building">
+          <img class="story-logo" src="{{IMG:nlb-logo.png}}" alt="NLB">
+        </div>
+        <div class="story-body">
+          <span class="story-tag story-tag-foundation">AI Strategy</span>
+          <h3>NLB: Scaling AI Agents with an Enterprise Agentic AI Platform</h3>
+          <span class="story-link">Read the case study &#8599;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy" id="talk">
+  <div class="container cta">
+    <div>
+      <h2>Start Where It Matters Most for You</h2>
+      <p>Let's walk your team through the value map, mark where you already are, and identify the areas with the highest-value business case for you to tackle.</p>
+    </div>
+    <a class="btn btn-tertiary" href="mailto:info@adastragrp.com">Book a Working Session</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     VIEW 2 — DEEP DIVE: HYPERPERSONALIZATION
+     ══════════════════════════════════════════════════════════════ -->
+<main class="view" id="view-detail" hidden>
+
+<header class="hero" id="hyperpersonalization">
+  <div class="container hero-grid">
+    <div>
+      <p class="crumbs"><a data-view="map" href="#value-map">Value Map</a> <span>&rsaquo;</span> <span>Revenue Growth</span> <span>&rsaquo;</span> <span>Hyperpersonalization</span></p>
+      <h1>Hyperpersonalization</h1>
+      <p class="hero-lede">Private banking was for the few. Hyperpersonalization makes it for everyone: individual-level intelligence and real-time decisioning, wired into revenue attribution.</p>
+      <div class="hero-actions">
+        <a class="btn btn-tertiary" href="#capabilities">See the Capabilities</a>
+        <a class="btn btn-accent-1" data-view="map" href="#value-map">Back to the Value Map</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="{{IMG:story-ubb.jpg}}" alt="Contactless mobile payment in a personalised banking app">
+    </div>
+  </div>
+</header>
+
+<section class="stats-bar">
+  <div class="container grid-4">
+    <div class="stat"><p class="stat-number">+20%</p><p class="stat-label">commission revenue in 8 months<br><small>Anonymized retail bank, McKinsey</small></p></div>
+    <div class="stat"><p class="stat-number">150–250%</p><p class="stat-label">higher cross-sell conversion<br><small>Sparkassen-Finanzgruppe</small></p></div>
+    <div class="stat"><p class="stat-number">2x</p><p class="stat-label">conversion via AI-assembled lead lists<br><small>McKinsey, ~400-banker survey</small></p></div>
+    <div class="stat"><p class="stat-number">+30%</p><p class="stat-label">risk-adjusted revenue per customer<br><small>Seacoast Bank, via Gartner</small></p></div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="section" id="capabilities">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">What We Build</p>
+      <h2>Six Capabilities, One System</h2>
+      <p>Three that build the intelligence, three that turn it into value. Sold separately they are pilots; built together they are a decisioning system the bank can attribute revenue to.</p>
+    </div>
+
+    <p class="row-label intel">Intelligence</p>
+    <div class="grid-3" style="margin-bottom:var(--space-10);">
+      <article class="card cap-card">
+        {{ICON:customer-insights}}
+        <h3>Individual Customer Intelligence</h3>
+        <p>AI-built profiles combining behavioural, transactional and contextual signals, moving from segments to n=1 personalisation at scale.</p>
+      </article>
+      <article class="card cap-card">
+        {{ICON:investment}}
+        <h3>Customer Lifetime Value Management</h3>
+        <p>Predict each customer's long-term value so personalisation effort goes where it returns. Often solid classical ML, proven and explainable.</p>
+        <p class="cap-proof">Seacoast Bank: +30% risk-adjusted revenue per customer (Gartner).</p>
+      </article>
+      <article class="card cap-card">
+        {{ICON:speed}}
+        <h3>Real-Time NBA / NBO Engine</h3>
+        <p>Sub-second decisioning that serves the right offer at the moment the customer is actually there.</p>
+        <p class="cap-proof">McKinsey: +20% commission revenue in 8 months; median 15x ROI (Accenture-Nomis).</p>
+      </article>
+    </div>
+
+    <p class="row-label value">Value</p>
+    <div class="grid-3">
+      <article class="card cap-card">
+        {{ICON:attract-customers}}
+        <h3>Cross-Sell, Upsell &amp; Acquisition</h3>
+        <p>AI-targeted recommendations and scoring of who to approach, whether they are already a customer or not.</p>
+        <p class="cap-proof">Sparkassen-Finanzgruppe: 150–250% higher conversion than mass campaigns.</p>
+      </article>
+      <article class="card cap-card">
+        {{ICON:consultation}}
+        <h3>Personalized Financial Guidance</h3>
+        <p>Proactive nudges on saving, spending and goals: the engagement layer that earns the right to sell later.</p>
+        <p class="cap-proof">DBS: 45M personalised nudges a month to 5M+ customers.</p>
+      </article>
+      <article class="card cap-card">
+        {{ICON:heart}}
+        <h3>Retention &amp; Churn Prevention</h3>
+        <p>Predicted churn signals trigger personalised retention before the customer disengages, at a fraction of re-acquisition cost.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">The Challenges</p>
+      <h2>Why Personalization Stalls Before It Pays Off</h2>
+      <p>Most banks are not short on ambition or pilots. They are short on production-grade infrastructure and proof. Four patterns show up again and again.</p>
+    </div>
+    <div class="grid-4">
+      <article class="card-outlined cap-card">
+        {{ICON:puzzle}}
+        <h3>Stuck at pilot stage</h3>
+        <p>Working pilots and bold targets, but revenue impact stays forward-looking, unattributed or undisclosed years into the initiative.</p>
+      </article>
+      <article class="card-outlined cap-card">
+        {{ICON:data-quality}}
+        <h3>Fragmented customer data</h3>
+        <p>41% of brands name siloed, non-centralized customer data as personalization's primary blocker, leaving models with nothing reliable to score against.</p>
+      </article>
+      <article class="card-outlined cap-card">
+        {{ICON:integrations}}
+        <h3>Models disconnected from delivery</h3>
+        <p>A trained model sitting in a lab does not move revenue. It has to be wired into live channel and pricing decisions to matter.</p>
+      </article>
+      <article class="card-outlined cap-card">
+        {{ICON:chart}}
+        <h3>No link between spend and result</h3>
+        <p>Without built-in attribution, a bank cannot separate the model's uplift from the market's, so the initiative cannot defend its own budget.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTIC -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">The Execution Gap Closes</p>
+      <h2>Hyperpersonalization Goes Agentic</h2>
+      <p>By 2029, 80% of common customer service issues will be resolved autonomously by agentic AI. (Gartner, 2025)</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Agent Landscape</p>
+      <h2>What Is Already Running, and What Is Next</h2>
+      <p>Where each agent sits today across the banks we track: an honest maturity read, not a product catalogue.</p>
+    </div>
+    <div>
+      <div class="tier">
+        <div class="tier-label">In Production</div>
+        <div class="tier-pills">
+          <span class="pill pill-live">Financial Nudge</span>
+          <span class="pill pill-live">Lead Nurturing</span>
+          <span class="pill pill-live">RM Preparation</span>
+          <span class="pill pill-live">Contact Centre Resolution</span>
+          <span class="pill pill-live">AI Coaching</span>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-label">Emerging</div>
+        <div class="tier-pills">
+          <span class="pill pill-emerging">Life Moment</span>
+          <span class="pill pill-emerging">Attrition Response</span>
+          <span class="pill pill-emerging">Prospecting</span>
+          <span class="pill pill-emerging">Offer Assembly</span>
+          <span class="pill pill-emerging">KYC &amp; Onboarding</span>
+        </div>
+      </div>
+      <div class="tier">
+        <div class="tier-label">Frontier</div>
+        <div class="tier-pills">
+          <span class="pill pill-frontier">Adviser Intelligence</span>
+          <span class="pill pill-frontier">Channel Orchestration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Outcomes</p>
+      <h2>Results Banks Are Already Seeing</h2>
+      <p>Every figure below is sourced and published, not a target and not ours to claim. This is the evidence bar we hold the business case to.</p>
+    </div>
+    <div class="card" style="padding:var(--space-4) var(--space-6);">
+      <table class="table">
+        <tr><td class="metric">+20% commission revenue within 8 months</td><td class="evidence">McKinsey, anonymized retail bank</td></tr>
+        <tr><td class="metric">150–250% higher cross-sell conversion vs. manual lists</td><td class="evidence">Sparkassen-Finanzgruppe, ~50M customers</td></tr>
+        <tr><td class="metric">2x conversion via AI-assembled lead lists</td><td class="evidence">McKinsey, ~400-banker US/Canada survey, Oct 2025</td></tr>
+        <tr><td class="metric">+30% risk-adjusted revenue per customer</td><td class="evidence">Seacoast Bank, Gartner-published</td></tr>
+        <tr><td class="metric">Median 15x ROI on real-time decisioning</td><td class="evidence">Accenture-Nomis</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="section section-dark">
+  <div class="container proof">
+    <div>
+      <p class="eyebrow">At Full Scale</p>
+      <p class="proof-quote">&ldquo;DBS Bank's Billion-Dollar AI Dream: Realized&rdquo;</p>
+      <p class="proof-source">Forrester</p>
+    </div>
+    <ul class="proof-list">
+      <li><b>45M</b><span>hyper-personalised nudges a month, to more than 5 million customers</span></li>
+      <li><b>800+</b><span>AI models and 350 use cases running in production</span></li>
+      <li><b>SGD 750M+</b><span>AI-attributed value in FY2024, disclosed by the CEO in Nov 2025</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2>The Questions We Get First</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>How is this different from the propensity models we have already invested in?</summary>
+        <p class="answer">Propensity scoring is the legacy layer, not the differentiator. BCG frames it as being superseded by uplift modelling, which targets the customers who convert <i>because of</i> an intervention rather than those who would have converted anyway. Your existing propensity work is a starting point, not the destination.</p>
+      </details>
+      <details>
+        <summary>Do we need a single customer view before we can start?</summary>
+        <p class="answer">Not to start, but to scale. 41% of brands name fragmented customer data as personalization's primary blocker, so it has to be solved. But we typically sequence unification alongside early decisioning work rather than treating it as a year-long prerequisite.</p>
+      </details>
+      <details>
+        <summary>Is this generative AI or classical machine learning?</summary>
+        <p class="answer">Both, depending on the capability. Real-time decisioning and behavioural segmentation lean on modern ML and AI techniques; lifetime-value modelling is often solid classical ML. We are explicit about which is which rather than labelling every component "AI".</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy">
+  <div class="container cta">
+    <div>
+      <p class="eyebrow">Next Step</p>
+      <h2>See What Your Data Is Already Telling You</h2>
+      <p>Most banks have more customer data than they use and more personalization ambition than production. Let us find the shortest path from pilot to provable revenue.</p>
+    </div>
+    <a class="btn btn-tertiary" href="mailto:info@adastragrp.com">Book a Working Session</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      {{LOGO}}
+      <p><b>Sources.</b> Case-study photography, logos and results (UBB, Tatra Banka, Raiffeisenbank, NLB) are real Adastra engagements from adastracorp.com: delivery credits, not market research. Market statistics elsewhere on this page are published research, not Adastra credits: Accenture (Q1 2026); Andrew Ng; Gartner (Mar 2025, and the 2029 agentic service forecast); McKinsey; Accenture-Nomis; Sparkassen-Finanzgruppe; Seacoast Bank via Gartner; BCG; DBS Bank and Forrester.</p>
+    </div>
+    <p class="foot-meta">AI in Financial Services &middot; Retail Banking<br>Work in progress, version June 2026</p>
+  </div>
+</footer>
+
+<script>
+/* Two-view shell: the map and one deep dive. Nav, tiles and back links all
+   route through the same handler; the hash keeps a view linkable and
+   survives a reload or a shared URL. */
+(function () {
+  var views = { map: document.getElementById('view-map'), detail: document.getElementById('view-detail') };
+  var DETAIL_HASH = '#hyperpersonalization';
+
+  function show(name, hash, push) {
+    views.map.hidden = name !== 'map';
+    views.detail.hidden = name !== 'detail';
+    if (push) history.pushState(null, '', hash || (name === 'detail' ? DETAIL_HASH : '#top'));
+    var target = hash && document.querySelector(hash);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[data-view]');
+    if (!link) return;
+    e.preventDefault();
+    show(link.getAttribute('data-view'), link.getAttribute('href'), true);
+  });
+
+  function fromHash() {
+    var h = location.hash;
+    var inDetail = h === DETAIL_HASH || (h && views.detail.querySelector(h));
+    views.map.hidden = !!inDetail;
+    views.detail.hidden = !inDetail;
+  }
+  window.addEventListener('popstate', fromHash);
+  fromHash();
+})();
+</script>
+
+</body>
+</html>

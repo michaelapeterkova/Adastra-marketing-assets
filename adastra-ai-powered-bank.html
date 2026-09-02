@@ -128,7 +128,7 @@ img,svg { display:block; max-width:100%; }
 .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-6); }
 .eyebrow {
   font-size:12px; font-weight:600; letter-spacing:0.28em;
-  text-transform:uppercase; color:var(--color-accent); margin-bottom:var(--space-2);
+  text-transform:uppercase; color:var(--color-accent); margin-bottom:var(--space-3);
 }
 /* Dark background rule (absolute): on any dark or coloured surface, text is
    only solid #ffffff — including eyebrows, labels and links. Every dark
@@ -200,44 +200,47 @@ img,svg { display:block; max-width:100%; }
 /* ── section heading block ────────────────────────────────────────── */
 .section-head { max-width:760px; margin-bottom:var(--space-10); }
 .section-head.center { margin-left:auto; margin-right:auto; text-align:center; }
-.section-head p { font-size:17px; color:var(--color-neutral-500); margin:0; }
+.section-head p:not(.eyebrow) { font-size:17px; color:var(--color-neutral-500); margin:0; }
 .section-navy .section-head p, .section-dark .section-head p { color:#fff; }
 
-/* ── the value map ("house") ──────────────────────────────────────── */
-.house { display:grid; gap:var(--space-10); }
+/* ── the value map ("house") — sized to fit one desktop screen ─────── */
+#value-map { padding-top:var(--space-6); padding-bottom:var(--space-6); }
+#value-map .section-head { max-width:980px; margin-bottom:var(--space-4); }
+.house { display:grid; gap:var(--space-4); }
 .house-band {
   background:var(--color-accent-2); color:#fff; border-radius:var(--radius-md);
-  padding:var(--space-6) var(--space-10); text-align:center;
+  padding:var(--space-3) var(--space-8); text-align:center;
+  display:flex; flex-wrap:wrap; align-items:baseline; justify-content:center; gap:var(--space-3);
 }
-.house-band h3 { color:#fff; font-size:22px; margin-bottom:var(--space-1); }
-.house-band p { font-size:15px; margin:0; }
+.house-band h3 { color:#fff; font-size:17px; margin-bottom:0; }
+.house-band p { font-size:14px; margin:0; }
 
 /* Row heading — a real title, not a tiny rotated label. */
-.row-heading { display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-5); }
+.row-heading { display:flex; align-items:baseline; justify-content:space-between; gap:var(--space-6); flex-wrap:wrap; margin-bottom:var(--space-2); }
 .row-heading-title { display:flex; align-items:center; gap:var(--space-4); }
 .row-heading-num { font-family:var(--font-heading); font-weight:700; font-size:15px; color:#fff; background:var(--color-accent); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.row-heading h3 { font-size:28px; margin:0; }
+.row-heading h3 { font-size:22px; margin:0; }
 .row-hint { font-size:14px; color:var(--color-neutral-500); }
 
 .pillars { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-4); }
-.pillar { display:flex; flex-direction:column; gap:var(--space-3); }
+.pillar { display:flex; flex-direction:column; gap:var(--space-2); }
 .pillar-head {
   background:var(--color-blue); color:#fff; border-radius:var(--radius-md);
-  padding:var(--space-4) var(--space-5); display:flex; align-items:center; gap:var(--space-3);
+  padding:10px var(--space-5); display:flex; align-items:center; gap:var(--space-3);
 }
-.pillar-head .ico { color:#fff; }
+.pillar-head .ico { color:#fff; width:32px; height:32px; }
 .pillar-head-title { font-family:var(--font-heading); font-weight:600; font-size:16px; line-height:1.2; }
-.pillar-boxes { display:flex; flex-direction:column; gap:var(--space-2); flex:1; }
+.pillar-boxes { display:flex; flex-direction:column; gap:6px; flex:1; }
 
 /* Every card in the grid looks the same, whether it's a label or a link.
    The only signal that a card goes somewhere is its own tag line. */
 .tile {
   background:#fff; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm);
-  padding:var(--space-5); display:flex; flex-direction:column; gap:6px;
+  padding:12px var(--space-5); display:flex; flex-direction:column; gap:4px;
   flex:1; text-decoration:none;
 }
 .tile-title { font-family:var(--font-heading); font-weight:700; font-size:15.5px; line-height:1.25; color:var(--color-accent-2); }
-.tile-desc { font-size:13.5px; line-height:1.45; color:var(--color-neutral-500); }
+.tile-desc { font-size:13.5px; line-height:1.35; color:var(--color-neutral-500); }
 .tile-cta {
   margin-top:2px; font-size:12px; font-weight:700; letter-spacing:0.1em;
   text-transform:uppercase; color:var(--color-accent);
@@ -247,14 +250,14 @@ a.tile { cursor:pointer; transition:box-shadow 0.18s; }
 a.tile:hover { box-shadow:var(--shadow-md); }
 
 /* Foundations block */
-.foundations { background:var(--color-blue); border-radius:var(--radius-md); padding:var(--space-5); display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4); }
+.foundations { background:var(--color-blue); border-radius:var(--radius-md); padding:var(--space-4); display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-3); }
 .foundation-item {
   border:1px solid rgba(255,255,255,0.25); border-radius:var(--radius-md);
-  padding:var(--space-5); display:flex; flex-direction:column; gap:var(--space-3); text-decoration:none;
+  padding:var(--space-4); display:flex; flex-direction:column; gap:var(--space-2); text-decoration:none;
 }
-.foundation-item .ico { color:#fff; }
-.foundation-name { font-family:var(--font-heading); font-weight:600; font-size:16px; line-height:1.2; }
-.foundation-detail { font-size:14.5px; line-height:1.45; }
+.foundation-item .ico { color:#fff; width:32px; height:32px; }
+.foundation-name { font-family:var(--font-heading); font-weight:600; font-size:15px; line-height:1.2; }
+.foundation-detail { font-size:14px; line-height:1.35; }
 a.foundation-item { transition:background 0.18s, border-color 0.18s; }
 a.foundation-item:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.45); }
 .foundation-cta { margin-top:auto; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; display:inline-flex; align-items:center; gap:5px; text-decoration:underline; text-underline-offset:3px; }
@@ -343,7 +346,7 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
   .hero-grid, .proof, .cta { grid-template-columns:1fr; gap:var(--space-8); }
   .hero-photo { display:none; }
   .pillars { grid-template-columns:repeat(2,1fr); }
-  .foundations { grid-template-columns:1fr; }
+  .foundations { grid-template-columns:repeat(2,1fr); }
   .story-grid { grid-template-columns:1fr; }
   .nav-links { display:none; }
   .grid-4 { grid-template-columns:repeat(2,1fr); }
@@ -353,7 +356,7 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
   .nav { padding:0 var(--space-6); }
   .nav-brand .nav-context { display:none; }
   h1 { font-size:32px; } h2 { font-size:25px; }
-  .pillars, .grid-2, .grid-3, .grid-4 { grid-template-columns:1fr; }
+  .pillars, .grid-2, .grid-3, .grid-4, .foundations { grid-template-columns:1fr; }
   .tier { grid-template-columns:1fr; gap:var(--space-3); }
   .foot-inner { grid-template-columns:1fr; }
   .foot-meta { text-align:left; }
@@ -493,7 +496,7 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
               <a class="tile" data-view="detail" href="#hyperpersonalization">
                 <span class="tile-title">Hyperpersonalization</span>
                 <span class="tile-desc">Grow revenue per customer with real-time, individually tailored offers.</span>
-                <span class="tile-cta">Deep dive &rsaquo;</span>
+                <span class="tile-cta">Explore More &rsaquo;</span>
               </a>
               <div class="tile"><span class="tile-title">Personal Advisory Intelligence</span><span class="tile-desc">Give advisers what they need to turn meetings into sales.</span></div>
               <div class="tile"><span class="tile-title">Conversational Banking</span><span class="tile-desc">Sell and service customers in the channel they already use.</span></div>
@@ -507,7 +510,7 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
               <a class="tile" href="https://solutions.adastracorp.com/solutions/ai-powered-back-office-automation-banks-insurers/" target="_blank" rel="noopener">
                 <span class="tile-title">Back Office Automation</span>
                 <span class="tile-desc">Cut servicing cost 20 to 40% and speed claims turnaround 40 to 60%.</span>
-                <span class="tile-cta">See the solution &#8599;</span>
+                <span class="tile-cta">Explore More &#8599;</span>
               </a>
               <div class="tile"><span class="tile-title">Contact Center Automation</span><span class="tile-desc">Cut contact center cost by resolving routine calls without an agent.</span></div>
               <div class="tile"><span class="tile-title">Front Office Automation</span><span class="tile-desc">Free branch and relationship staff to sell instead of process paperwork.</span></div>
@@ -549,16 +552,24 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
             <svg class="ico" viewBox="0 0 500 500" fill="currentColor" aria-hidden="true" focusable="false"><g><g><path d="M415,321c-3.313,0-6-2.687-6-6v-29h-44c-3.313,0-6-2.687-6-6s2.687-6,6-6h50c3.313,0,6,2.687,6,6 v35C421,318.313,418.313,321,415,321z" fill="currentColor" /></g><g><path d="M415,351c-11.579,0-21-9.421-21-21s9.421-21,21-21s21,9.421,21,21S426.579,351,415,351z M415,321 c-4.963,0-9,4.037-9,9s4.037,9,9,9s9-4.037,9-9S419.963,321,415,321z" fill="currentColor" /></g><g><path d="M415,226h-50c-3.313,0-6-2.687-6-6s2.687-6,6-6h44v-29c0-3.313,2.687-6,6-6s6,2.687,6,6v35 C421,223.313,418.313,226,415,226z" fill="currentColor" /></g><g><path d="M415,191c-11.579,0-21-9.42-21-21s9.421-21,21-21s21,9.42,21,21S426.579,191,415,191z M415,161 c-4.963,0-9,4.038-9,9s4.037,9,9,9s9-4.038,9-9S419.963,161,415,161z" fill="currentColor" /></g><g><path d="M85,321c-3.313,0-6-2.687-6-6v-35c0-3.313,2.687-6,6-6h50c3.313,0,6,2.687,6,6s-2.687,6-6,6H91v29 C91,318.313,88.313,321,85,321z" fill="currentColor" /></g><g><path d="M85,351c-11.58,0-21-9.421-21-21s9.42-21,21-21s21,9.421,21,21S96.58,351,85,351z M85,321 c-4.962,0-9,4.037-9,9s4.038,9,9,9s9-4.037,9-9S89.962,321,85,321z" fill="currentColor" /></g><g><path d="M135,226H85c-3.313,0-6-2.687-6-6v-35c0-3.313,2.687-6,6-6s6,2.687,6,6v29h44c3.313,0,6,2.687,6,6 S138.313,226,135,226z" fill="currentColor" /></g><g><path d="M85,191c-11.58,0-21-9.42-21-21s9.42-21,21-21s21,9.42,21,21S96.58,191,85,191z M85,161 c-4.962,0-9,4.038-9,9s4.038,9,9,9s9-4.038,9-9S89.962,161,85,161z" fill="currentColor" /></g><g><path d="M220,141c-3.313,0-6-2.687-6-6V91h-29c-3.313,0-6-2.687-6-6s2.687-6,6-6h35c3.313,0,6,2.687,6,6v50 C226,138.313,223.313,141,220,141z" fill="currentColor" /></g><g><path d="M170,106c-11.58,0-21-9.42-21-21s9.42-21,21-21s21,9.42,21,21S181.58,106,170,106z M170,76 c-4.962,0-9,4.038-9,9s4.038,9,9,9s9-4.038,9-9S174.962,76,170,76z" fill="currentColor" /></g><g><path d="M280,141c-3.313,0-6-2.687-6-6V85c0-3.313,2.687-6,6-6h35c3.313,0,6,2.687,6,6s-2.687,6-6,6h-29v44 C286,138.313,283.313,141,280,141z" fill="currentColor" /></g><g><path d="M330,106c-11.579,0-21-9.42-21-21s9.421-21,21-21s21,9.42,21,21S341.579,106,330,106z M330,76 c-4.963,0-9,4.038-9,9s4.037,9,9,9s9-4.038,9-9S334.963,76,330,76z" fill="currentColor" /></g><g><path d="M315,421h-35c-3.313,0-6-2.687-6-6v-50c0-3.313,2.687-6,6-6s6,2.687,6,6v44h29c3.313,0,6,2.687,6,6 S318.313,421,315,421z" fill="currentColor" /></g><g><path d="M330,436c-11.579,0-21-9.421-21-21s9.421-21,21-21s21,9.421,21,21S341.579,436,330,436z M330,406 c-4.963,0-9,4.037-9,9s4.037,9,9,9s9-4.037,9-9S334.963,406,330,406z" fill="currentColor" /></g><g><path d="M220,421h-35c-3.313,0-6-2.687-6-6s2.687-6,6-6h29v-44c0-3.313,2.687-6,6-6s6,2.687,6,6v50 C226,418.313,223.313,421,220,421z" fill="currentColor" /></g><g><path d="M170,436c-11.58,0-21-9.421-21-21s9.42-21,21-21s21,9.421,21,21S181.58,436,170,436z M170,406 c-4.962,0-9,4.037-9,9s4.038,9,9,9s9-4.037,9-9S174.962,406,170,406z" fill="currentColor" /></g><g><path d="M345,371H155c-14.336,0-26-11.663-26-26V155c0-14.336,11.664-26,26-26h190 c14.337,0,26,11.664,26,26v190C371,359.337,359.337,371,345,371z M155,141c-7.72,0-14,6.28-14,14v190c0,7.72,6.28,14,14,14h190 c7.72,0,14-6.28,14-14V155c0-7.72-6.28-14-14-14H155z" fill="currentColor" /></g><g><path d="M189.998,296.002c-0.764,0-1.541-0.147-2.291-0.457c-3.062-1.267-4.518-4.775-3.251-7.838 l8.129-19.656c0.033-0.085,0.068-0.17,0.105-0.253l24.851-60.091c0.928-2.244,3.116-3.707,5.544-3.707h8.816 c2.428,0,4.616,1.463,5.544,3.706l24.864,60.092c0.036,0.083,0.071,0.168,0.104,0.253l8.131,19.655 c1.268,3.062-0.188,6.571-3.25,7.838c-3.061,1.267-6.572-0.188-7.838-3.25l-6.651-16.078h-50.611l-6.649,16.077 C194.588,294.605,192.353,296.002,189.998,296.002z M207.156,264.216h40.684L227.89,216h-0.793L207.156,264.216z M297,296 c-3.313,0-6-2.687-6-6v-80c0-3.313,2.687-6,6-6s6,2.687,6,6v80C303,293.313,300.313,296,297,296z" fill="currentColor" /></g></g></svg>
             <div>
               <div class="foundation-name">AI Platform &amp; Technology Enablement</div>
-              <div class="foundation-detail">The platform every use case runs on, including AI governance.</div>
+              <div class="foundation-detail">The platform every use case runs on.</div>
             </div>
           </div>
+          <a class="foundation-item" href="https://solutions.adastracorp.com/solutions/ai-governance/" target="_blank" rel="noopener">
+            <svg class="ico" viewBox="0 0 500 500" fill="currentColor" aria-hidden="true" focusable="false"><g><g><g><defs><rect id="SVGID_1_" width="500" height="500" /></defs><clipPath id="SVGID_00000089561988967919765340000002860498962412416388_"><use href="#SVGID_1_" style="overflow:visible;" /></clipPath><g style="clip-path:url(#SVGID_00000089561988967919765340000002860498962412416388_);"><g><path d="M252,426.5c-1.1,0-2.2-0.3-3.2-0.9c-63.3-39.6-106.8-96.2-129.2-168c-17.8-57.2-17-107.1-16.7-128.5 c0-2.2,0.1-4,0.1-5.5c0-2.9,2.1-5.5,5-5.9c44.6-7.2,140.7-46.3,141.7-46.7c1.5-0.6,3.1-0.6,4.5,0c1,0.4,97.1,39.4,141.7,46.7 c2.9,0.5,5,3,5,5.9c0,1.5,0,3.3,0.1,5.5c0.4,21.3,1.2,71.2-16.7,128.5c-22.4,71.9-65.9,128.4-129.2,168 C254.2,426.2,253.1,426.5,252,426.5z M114.9,128.6c0,0.2,0,0.4,0,0.7C112.3,289,187.2,371.8,252,413.4 c64.8-41.6,139.7-124.4,137.1-284.1c0-0.2,0-0.5,0-0.7C345.2,120.1,266.7,88.9,252,83C237.3,88.9,158.8,120.2,114.9,128.6z" fill="currentColor"/></g><g><path d="M224.9,299.6c-1.6,0-3.1-0.6-4.2-1.8l-45.1-45.1c-2.3-2.3-2.3-6.1,0-8.5c2.3-2.3,6.1-2.3,8.5,0l40.8,40.8 l102.7-103c2.3-2.3,6.1-2.4,8.5,0c2.3,2.3,2.4,6.1,0,8.5l-107,107.4C228,299,226.5,299.6,224.9,299.6L224.9,299.6z" fill="currentColor"/></g></g></g></g></svg>
+            <div>
+              <div class="foundation-name">AI Governance</div>
+              <div class="foundation-detail">Controls and oversight built in, not bolted on after the fact.</div>
+            </div>
+            <span class="foundation-cta">Explore More &#8599;</span>
+          </a>
           <a class="foundation-item" href="https://adastracorp.com/ai-ready-data/" target="_blank" rel="noopener">
             <svg class="ico" viewBox="0 0 500 500" fill="currentColor" aria-hidden="true" focusable="false"><path d="M348.518,94.69c-8.21-4.865-17.25-9.048-26.924-12.507l3.461,5.997 c1.571,2.712,1.788,5.827,0.883,8.585c5.804,2.46,11.322,5.202,16.462,8.248c23.602,13.986,36.6,32.243,36.6,51.407v220 c0,19.164-12.998,37.421-36.6,51.406c-24.586,14.571-57.401,22.594-92.4,22.594c-35,0-67.814-8.023-92.4-22.594 c-23.602-13.985-36.6-32.242-36.6-51.406v-220c0-19.164,12.998-37.421,36.6-51.407c5.141-3.046,10.66-5.788,16.465-8.249 c-0.903-2.758-0.685-5.872,0.88-8.584l3.461-5.997c-9.674,3.459-18.714,7.642-26.924,12.507C124.087,110.923,109,132.846,109,156.42 v220c0,23.573,15.087,45.496,42.482,61.73c26.41,15.651,61.398,24.27,98.518,24.27s72.107-8.619,98.518-24.27 C375.913,421.916,391,399.993,391,376.42v-220C391,132.846,375.913,110.923,348.518,94.69z" fill="currentColor" /><g><path d="M250,388.42c-37.12,0-72.108-8.619-98.518-24.27C124.087,347.916,109,325.993,109,302.42 c0-3.313,2.687-6,6-6s6,2.687,6,6c0,19.164,12.998,37.421,36.6,51.406c24.586,14.571,57.4,22.594,92.4,22.594 c34.999,0,67.814-8.023,92.4-22.594c23.602-13.985,36.6-32.242,36.6-51.406c0-3.313,2.687-6,6-6s6,2.687,6,6 c0,23.573-15.087,45.496-42.482,61.73C322.107,379.801,287.12,388.42,250,388.42z M250,242.42c-37.12,0-72.108-8.619-98.518-24.27 C124.087,201.917,109,179.994,109,156.42c0-3.313,2.687-6,6-6s6,2.687,6,6c0,19.164,12.998,37.421,36.6,51.407 c24.586,14.569,57.4,22.593,92.4,22.593c34.999,0,67.814-8.024,92.4-22.593c23.602-13.986,36.6-32.243,36.6-51.407 c0-3.313,2.687-6,6-6s6,2.687,6,6c0,23.574-15.087,45.497-42.482,61.73C322.107,233.801,287.12,242.42,250,242.42z" fill="currentColor" /></g><g><path d="M250,315.42c-37.12,0-72.108-8.619-98.518-24.27C124.087,274.916,109,252.993,109,229.42 c0-3.313,2.687-6,6-6s6,2.687,6,6c0,19.164,12.998,37.42,36.6,51.406c24.586,14.571,57.4,22.594,92.4,22.594 c34.999,0,67.814-8.023,92.4-22.594c23.602-13.986,36.6-32.242,36.6-51.406c0-3.313,2.687-6,6-6s6,2.687,6,6 c0,23.573-15.087,45.496-42.482,61.73C322.107,306.801,287.12,315.42,250,315.42z" fill="currentColor" /></g><g><path d="M152.49,397.42h-0.01c-4.142,0-7.5-3.357-7.5-7.5s3.358-7.5,7.5-7.5s7.505,3.357,7.505,7.5 S156.632,397.42,152.49,397.42z M182.49,339.42h-0.01c-4.142,0-7.5-3.357-7.5-7.5s3.358-7.5,7.5-7.5s7.505,3.357,7.505,7.5 S186.632,339.42,182.49,339.42z M152.5,324.42h-0.01c-4.142,0-7.5-3.357-7.5-7.5s3.358-7.5,7.5-7.5s7.505,3.357,7.505,7.5 S156.642,324.42,152.5,324.42z M182.5,266.42h-0.01c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5s7.505,3.358,7.505,7.5 S186.642,266.42,182.5,266.42z M152.51,251.42h-0.01c-4.142,0-7.5-3.358-7.5-7.5s3.358-7.5,7.5-7.5s7.505,3.358,7.505,7.5 S156.652,251.42,152.51,251.42z" fill="currentColor" /></g><g><path d="M262.575,202.42h-25.15c-9.142,0-16.58-7.438-16.58-16.58v-7.659 c-3.209-1.531-6.299-3.319-9.241-5.347l-6.64,3.833c-3.825,2.215-8.292,2.807-12.57,1.663c-4.282-1.145-7.86-3.891-10.076-7.73 l-12.57-21.78c-2.214-3.825-2.807-8.292-1.663-12.569c1.145-4.282,3.891-7.86,7.73-10.076l6.639-3.833 c-0.146-1.807-0.22-3.593-0.22-5.341c0-1.752,0.074-3.538,0.219-5.341l-6.639-3.833c-7.915-4.567-10.637-14.726-6.067-22.645 l12.57-21.78c4.568-7.916,14.726-10.636,22.646-6.068l6.639,3.833c2.934-2.022,6.024-3.81,9.242-5.345v-7.66 c0-9.142,7.438-16.58,16.58-16.58h25.15c9.143,0,16.58,7.438,16.58,16.58v7.66c3.218,1.536,6.309,3.323,9.242,5.345l6.638-3.832 c3.836-2.213,8.3-2.802,12.579-1.657c4.278,1.146,7.854,3.889,10.068,7.725l12.568,21.78c2.215,3.824,2.808,8.291,1.664,12.568 c-1.146,4.282-3.891,7.861-7.731,10.077l-6.639,3.833c0.146,1.806,0.22,3.592,0.22,5.341c0,1.752-0.073,3.539-0.219,5.341 l6.639,3.833c3.835,2.213,6.578,5.789,7.724,10.067c1.145,4.276,0.557,8.743-1.656,12.578l-12.57,21.78 c-2.213,3.836-5.789,6.579-10.067,7.725c-4.276,1.144-8.744,0.556-12.578-1.657l-6.639-3.833c-2.934,2.022-6.023,3.809-9.242,5.345 v7.66C279.155,194.982,271.718,202.42,262.575,202.42z M211.994,159.68c1.312,0,2.617,0.429,3.696,1.273 c4.108,3.211,8.618,5.82,13.403,7.754c2.268,0.917,3.752,3.117,3.752,5.563v11.57c0,2.525,2.054,4.58,4.58,4.58h25.15 c2.525,0,4.58-2.055,4.58-4.58v-11.57c0-2.444,1.482-4.644,3.747-5.561c4.813-1.95,9.323-4.558,13.404-7.753 c1.925-1.51,4.577-1.697,6.698-0.472l10.03,5.79c1.06,0.612,2.298,0.774,3.476,0.458c1.181-0.316,2.167-1.073,2.777-2.131 l12.57-21.78c0.611-1.061,0.774-2.295,0.458-3.477c-0.316-1.18-1.072-2.167-2.131-2.777c0,0,0,0-0.001,0l-10.029-5.79 c-2.115-1.222-3.279-3.604-2.942-6.023c0.366-2.633,0.552-5.242,0.552-7.753c0-2.502-0.186-5.112-0.553-7.756 c-0.335-2.419,0.829-4.8,2.943-6.021l10.029-5.79c1.062-0.613,1.821-1.602,2.138-2.784c0.314-1.178,0.151-2.407-0.46-3.462 l-12.573-21.789c-0.611-1.058-1.598-1.814-2.778-2.131c-1.178-0.316-2.416-0.154-3.477,0.458l-10.029,5.79 c-2.12,1.224-4.772,1.038-6.698-0.472c-4.082-3.196-8.592-5.804-13.403-7.753c-2.266-0.917-3.748-3.117-3.748-5.561V48.16 c0-2.525-2.055-4.58-4.58-4.58h-25.15c-2.525,0-4.58,2.055-4.58,4.58v11.57c0,2.444-1.482,4.644-3.748,5.561 c-4.812,1.949-9.321,4.558-13.404,7.753c-1.927,1.509-4.578,1.696-6.698,0.472l-10.03-5.79c-2.188-1.262-4.994-0.512-6.253,1.673 l-12.57,21.78c-0.612,1.06-0.774,2.295-0.458,3.477c0.316,1.18,1.073,2.167,2.131,2.777l10.03,5.791 c2.116,1.221,3.28,3.604,2.943,6.023c-0.367,2.635-0.553,5.244-0.553,7.753c0,2.5,0.186,5.11,0.553,7.756 c0.335,2.419-0.829,4.8-2.944,6.021l-10.03,5.79c-1.062,0.613-1.82,1.601-2.136,2.783c-0.315,1.178-0.152,2.408,0.459,3.464 l12.575,21.788c0.612,1.061,1.601,1.82,2.783,2.136c1.178,0.316,2.409,0.152,3.464-0.459l10.037-5.794 C209.928,159.945,210.963,159.68,211.994,159.68z M249.995,154.6c-20.733,0-37.6-16.867-37.6-37.6s16.867-37.6,37.6-37.6 c20.732,0,37.6,16.867,37.6,37.6S270.728,154.6,249.995,154.6z M249.995,91.4c-14.116,0-25.6,11.484-25.6,25.6 s11.484,25.6,25.6,25.6c14.115,0,25.6-11.484,25.6-25.6S264.11,91.4,249.995,91.4z" fill="currentColor" /></g></svg>
             <div>
               <div class="foundation-name">AI-Ready Data</div>
               <div class="foundation-detail">The bedrock. Nothing above it works without it.</div>
             </div>
-            <span class="foundation-cta">See the solution &#8599;</span>
+            <span class="foundation-cta">Explore More &#8599;</span>
           </a>
         </div>
       </div>

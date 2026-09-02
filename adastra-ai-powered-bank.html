@@ -334,11 +334,12 @@ a.foundation-item:hover { background:rgba(255,255,255,0.08); border-color:rgba(2
 .cta { display:grid; grid-template-columns:1.2fr auto; gap:var(--space-12); align-items:center; }
 .cta h2 { color:#fff; margin-bottom:var(--space-3); }
 .cta p { font-size:17px; margin:0; max-width:600px; }
-footer { background:#fff; border-top:1px solid var(--color-divider); padding:var(--space-10); }
-.foot-inner { max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:var(--space-8); align-items:end; }
-.foot-inner .logo { width:110px; color:var(--color-accent); margin-bottom:var(--space-4); }
-footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); margin:0; max-width:820px; }
-.foot-meta { font-size:12px; color:var(--color-neutral-400); text-align:right; white-space:nowrap; }
+footer { background:#fff; border-top:1px solid var(--color-divider); padding:var(--space-8); }
+.foot-inner { max-width:1280px; margin:0 auto; }
+.foot-logo-link { display:inline-flex; align-items:center; gap:var(--space-3); text-decoration:none; }
+.foot-logo-link .logo { width:110px; color:var(--color-accent); }
+.foot-logo-url { font-size:13px; font-weight:600; color:var(--color-neutral-500); }
+.foot-logo-link:hover .foot-logo-url { text-decoration:underline; }
 
 /* ── responsive ───────────────────────────────────────────────────── */
 @media (max-width:1080px) {
@@ -358,8 +359,6 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
   h1 { font-size:32px; } h2 { font-size:25px; }
   .pillars, .grid-2, .grid-3, .grid-4, .foundations { grid-template-columns:1fr; }
   .tier { grid-template-columns:1fr; gap:var(--space-3); }
-  .foot-inner { grid-template-columns:1fr; }
-  .foot-meta { text-align:left; }
   .row-heading { flex-direction:column; align-items:flex-start; gap:var(--space-2); }
   .tile-title { font-size:17px; }
   .tile-desc { font-size:15px; line-height:1.5; }
@@ -893,7 +892,7 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
 
 <footer>
   <div class="foot-inner">
-    <div>
+    <a class="foot-logo-link" href="https://adastracorp.com" target="_blank" rel="noopener">
       <svg class="logo" viewBox="0 0 231.1 73.4" fill="currentColor" role="img" aria-label="Adastra"><g>
 <polygon fill="currentColor" points="24.3,48.8 28.6,48.8 32,40.7 27.7,40.7 "></polygon>
 <polygon fill="currentColor" points="39.8,32.6 33,48.8 37.3,48.8 44.1,32.6 "></polygon>
@@ -906,9 +905,8 @@ footer p { font-size:11.5px; line-height:1.7; color:var(--color-neutral-500); ma
 <path fill="currentColor" d="M101,24.5L90.8,48.8h4.3l2.2-5.2H109l2.2,5.2h4.3l-10.2-24.3H101z M99,39.7l4.2-10l4.2,10H99z"></path>
 <path fill="currentColor" d="M196.6,24.5h-4.3l-10.2,24.3h4.3l2.2-5.2h11.7l2.2,5.2h4.3L196.6,24.5z M190.2,39.7l4.2-10l4.2,10H190.2z"></path>
 </g></svg>
-      <p><b>Sources.</b> Case-study photography, logos and results (UBB, Tatra Banka, Raiffeisenbank, NLB) are real Adastra engagements from adastracorp.com: delivery credits, not market research. Market statistics elsewhere on this page are published research, not Adastra credits: Accenture (Q1 2026); Andrew Ng; Gartner (Mar 2025, and the 2029 agentic service forecast); McKinsey; Accenture-Nomis; Sparkassen-Finanzgruppe; Seacoast Bank via Gartner; BCG; DBS Bank and Forrester.</p>
-    </div>
-    <p class="foot-meta">AI in Financial Services &middot; Retail Banking<br>Work in progress, version June 2026</p>
+      <span class="foot-logo-url">adastracorp.com</span>
+    </a>
   </div>
 </footer>
 
